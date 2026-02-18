@@ -1,0 +1,52 @@
+@import "tailwindcss";
+
+:root {
+  --bg: #0f172a;
+  --fg: #e2e8f0;
+  --panel: #111827;
+  --muted: #94a3b8;
+  --accent-cyan: #06b6d4;
+  --accent-purple: #8b5cf6;
+}
+
+@theme inline {
+  --color-background: var(--bg);
+  --color-foreground: var(--fg);
+  --font-sans: var(--font-display);
+  --font-mono: var(--font-mono);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  background: radial-gradient(circle at 20% 20%, rgba(6, 182, 212, 0.08), transparent 25%),
+    radial-gradient(circle at 80% 0%, rgba(139, 92, 246, 0.08), transparent 25%),
+    linear-gradient(135deg, #0b1220 0%, #0f172a 60%, #0b1020 100%);
+  color: var(--fg);
+  font-family: var(--font-display), "Inter", "Segoe UI", system-ui, -apple-system,
+    sans-serif;
+  letter-spacing: 0.01em;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--accent-cyan) 35%, transparent);
+  color: #e2e8f0;
+}
+
+.glass-panel {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.01));
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.35);
+}
+
+.grid-overlay {
+  background-image: linear-gradient(
+      rgba(255, 255, 255, 0.03) 1px,
+      transparent 1px
+    ),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
