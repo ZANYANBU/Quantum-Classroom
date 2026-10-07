@@ -5,7 +5,7 @@
 [![Next.js 16](https://img.shields.io/badge/Next.js-16-000?logo=nextdotjs&logoColor=white)](https://nextjs.org)
 [![FastAPI](https://img.shields.io/badge/FastAPI-009688?logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com)
 
-**A Comprehensive Virtual Quantum Computing Laboratory**
+**A side project: a browser lab that runs real Qiskit circuits**
 
 > An interactive full-stack educational platform for learning quantum computing through hands-on experiments using Qiskit.
 
@@ -14,9 +14,9 @@
 
 <p align="center"><img src="docs/screenshots/exp1-state-vectors.png" alt="Experiment 1 with a measurement histogram of a qubit in superposition" width="900"></p>
 
-**Developed by:** V Anbuchelban  
+**Developed by:** V. Anbuchelvan  
 **Institution:** SRM Institute of Science and Technology  
-**Purpose:** Educational quantum computing practical project
+**Purpose:** A side project built for a quantum computing course
 
 ---
 
