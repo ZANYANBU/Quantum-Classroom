@@ -9,6 +9,11 @@
 
 > An interactive full-stack educational platform for learning quantum computing through hands-on experiments using Qiskit.
 
+<p align="center"><img src="docs/screenshots/exp9-grover.png" alt="Grover's Algorithm in the lab: theory, sliders, the Qiskit editor and validated results" width="900"></p>
+<p align="center"><i>Experiment 9, Grover's Algorithm: the Qiskit code runs on the backend and the result panel checks the answer.</i></p>
+
+<p align="center"><img src="docs/screenshots/exp1-state-vectors.png" alt="Experiment 1 with a measurement histogram of a qubit in superposition" width="900"></p>
+
 **Developed by:** V Anbuchelban  
 **Institution:** SRM Institute of Science and Technology  
 **Purpose:** Educational quantum computing practical project
