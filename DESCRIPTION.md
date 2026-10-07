@@ -528,7 +528,7 @@ Depth: O(n²), Gates: O(n²)
 ### Code Execution Flow
 1. Student writes/modifies Qiskit code in Monaco editor
 2. Frontend sends POST request to `/api/execute`
-3. Backend executes in sandboxed environment (30s timeout)
+3. Backend executes the code (30s timeout)
 4. Qiskit runs quantum simulation
 5. Results serialized to JSON
 6. Frontend visualizes with Recharts

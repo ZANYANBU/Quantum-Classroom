@@ -1,5 +1,10 @@
 # Quantum Classroom - QuantumLab
 
+[![CI](https://github.com/ZANYANBU/Quantum-Classroom/actions/workflows/ci.yml/badge.svg)](https://github.com/ZANYANBU/Quantum-Classroom/actions/workflows/ci.yml)
+[![Qiskit 1.2](https://img.shields.io/badge/Qiskit-1.2-6929C4?logo=qiskit&logoColor=white)](https://www.ibm.com/quantum/qiskit)
+[![Next.js 16](https://img.shields.io/badge/Next.js-16-000?logo=nextdotjs&logoColor=white)](https://nextjs.org)
+[![FastAPI](https://img.shields.io/badge/FastAPI-009688?logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com)
+
 **A Comprehensive Virtual Quantum Computing Laboratory**
 
 > An interactive full-stack educational platform for learning quantum computing through hands-on experiments using Qiskit.
@@ -39,7 +44,7 @@ QuantumLab is a modern web-based quantum computing laboratory designed to provid
 ### Backend Technologies
 - **Framework**: FastAPI (Python)
 - **Quantum SDK**: Qiskit 1.3.1 with Qiskit Aer
-- **Security**: 30-second execution timeout, sandboxed code execution
+- **Limits**: 30-second execution timeout; the submitted code cannot call `open` or `compile` (it is not a full sandbox, see [Run it locally](#-run-it-locally))
 - **API**: RESTful endpoints with CORS support
 
 ### Platform Features
@@ -314,7 +319,8 @@ Quantum-Classroom/
 ├── api/                          # FastAPI Backend
 │   ├── main.py                   # Main API with /execute endpoint
 │   ├── requirements.txt          # Python dependencies (Qiskit, FastAPI)
-│   └── test_experiments.py       # Backend validation tests
+│   ├── requirements-dev.txt      # Test dependencies (pytest, httpx)
+│   └── tests/                    # API tests, and all 12 experiments run end to end
 │
 ├── frontend/                     # Next.js Frontend
 │   ├── src/
@@ -350,7 +356,7 @@ Quantum-Classroom/
 1. **User loads experiment** → Next.js renders page with experiment data from `experiments.ts`
 2. **User edits code** → Monaco Editor updates → Zustand persists to localStorage
 3. **User clicks "Run"** → POST request to `/api/execute` with code and parameters
-4. **Backend executes** → Qiskit runs in sandboxed environment (30s timeout)
+4. **Backend executes** → Qiskit runs on the backend (30s timeout)
 5. **Results returned** → JSON with stdout, result object, and errors
 6. **Frontend visualizes** → Recharts renders histograms, formatted output displays
 
@@ -520,15 +526,34 @@ Execute Qiskit code on the backend simulator.
 
 ---
 
+## 🔒 Run it locally
+
+The backend runs whatever Python it is sent: that is how the lab executes your
+Qiskit code. Run it on your own machine or a trusted network. Do not expose the
+API to the internet as it is.
+
+---
+
 ## 🧪 Running Tests
 
 ### Backend Tests
 ```bash
 cd api
-python test_experiments.py
+pip install -r requirements-dev.txt
+pytest
 ```
 
-This validates all 12 experiments execute correctly.
+The tests read the experiment code straight from `frontend/src/lib/experiments.ts`
+and run it against the real backend, so they check what a student actually gets:
+
+- all 12 experiments run and return a result
+- every slider runs at its minimum and maximum
+- the physics is right where a circuit has one answer (the half adder adds, Deutsch
+  tells constant from balanced, Grover finds the marked state, BB84 keys match)
+- the `/execute` endpoint reports errors and serialises complex amplitudes
+
+The same tests, plus the frontend lint, type-check and build, run on every push
+and pull request.
 
 ### Frontend Lint
 ```bash
@@ -547,7 +572,7 @@ npm start
 
 ## 🛡️ Security & Validation
 
-- **Sandboxed Execution**: Backend restricts dangerous operations
+- **Restricted builtins**: Submitted code cannot call `open` or `compile`. Imports are allowed, so this is not a full sandbox
 - **30-second Timeout**: Prevents infinite loops
 - **Error Handling**: Clear error messages for debugging
 - **Result Validation**: Automatic verification of expected outcomes
@@ -695,6 +720,10 @@ For Windows, modify the timeout logic in the `execute` endpoint.
 5. Deploy
 
 ### Deploy Backend (Railway/Render)
+
+> **Before you deploy:** the `/execute` endpoint runs any Python it receives and can
+> import any module. Put the backend behind authentication, or run it in an isolated
+> container that holds nothing you care about. See [Run it locally](#-run-it-locally).
 
 **Railway:**
 ```bash

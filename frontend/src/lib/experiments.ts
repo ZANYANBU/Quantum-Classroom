@@ -251,7 +251,7 @@ The -1 phase kicks back, flipping control from |+⟩ to |-⟩!
 **Applications**: Deutsch-Jozsa algorithm, phase estimation, Grover's oracle.
 
 **Expected Results**: Measurement in X-basis shows control qubit flipped due to phase kickback.`,
-    code: `from qiskit import QuantumCircuit, execute
+    code: `from qiskit import QuantumCircuit
 from qiskit.quantum_info import Statevector
 import numpy as np
 
@@ -477,8 +477,9 @@ for a in [0, 1]:
         
         # Extract most common result
         result_bits = max(counts, key=counts.get)
-        carry = int(result_bits[1])
-        sum_bit = int(result_bits[0])
+        # Qiskit prints classical bit 0 on the right: "carry sum"
+        carry = int(result_bits[0])
+        sum_bit = int(result_bits[1])
         
         expected_sum = a ^ b
         expected_carry = a & b
@@ -1037,7 +1038,7 @@ Quantum Bit Error Rate (QBER) reveals eavesdropping:
 **No-Cloning Theorem**: Eve cannot copy quantum states perfectly
 
 **Expected Results**: ~50% matching bases, low QBER, secure shared key.`,
-    code: `from qiskit import QuantumCircuit, execute
+    code: `from qiskit import QuantumCircuit
 from qiskit_aer import Aer
 import random
 import numpy as np

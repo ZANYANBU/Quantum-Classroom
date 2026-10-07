@@ -124,7 +124,8 @@ git commit -m "changes"
    ```bash
    # Backend
    cd api
-   python test_experiments.py
+   pip install -r requirements-dev.txt
+   pytest
    
    # Frontend
    cd frontend

@@ -50,11 +50,11 @@ def _serialize_complex(obj: Any) -> Any:
         return None
     
     # Handle numpy types
-    if isinstance(obj, (np.integer, np.floating)):
+    if isinstance(obj, (np.integer, np.floating, np.bool_)):
         return obj.item()
     
     if isinstance(obj, np.ndarray):
-        return obj.tolist()
+        return _serialize_complex(obj.tolist())
     
     if isinstance(obj, complex):
         # Represent complex as [real, imag] for JSON
@@ -89,11 +89,12 @@ def _serialize_complex(obj: Any) -> Any:
 async def execute(payload: ExecuteRequest):
     stdout_buffer = io.StringIO()
     stderr_buffer = io.StringIO()
-    local_env: dict[str, Any] = {}
     
     # Set up execution environment with necessary built-ins
-    # We need to allow imports but restrict dangerous file operations
-    safe_globals = {
+    # We need to allow imports but restrict dangerous file operations.
+    # One namespace for globals and locals: with two, a function defined by the
+    # submitted code cannot see that code's own imports or variables.
+    env: dict[str, Any] = {
         "__builtins__": {
             k: v for k, v in __builtins__.items()
             if k not in ['open', 'compile', 'execfile']  # Keep __import__ for module imports
@@ -112,7 +113,7 @@ async def execute(payload: ExecuteRequest):
         
         # Capture both stdout and stderr
         with contextlib.redirect_stdout(stdout_buffer), contextlib.redirect_stderr(stderr_buffer):
-            exec(payload.code, safe_globals, local_env)
+            exec(payload.code, env)
         
         # Cancel timeout
         try:
@@ -121,7 +122,7 @@ async def execute(payload: ExecuteRequest):
             pass
         
         # Serialize the result
-        raw_result = local_env.get("result")
+        raw_result = env.get("result")
         serialized_result = _serialize_complex(raw_result)
         
         # Combine stdout and stderr
