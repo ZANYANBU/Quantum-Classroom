@@ -104,3 +104,12 @@ def test_exp12_qft_of_a_basis_state_is_uniform_in_magnitude(results):
     transformed = [amplitude(a) for a in results["exp-12"]["result"]["qft_statevector"]]
     assert len(transformed) == 8
     assert [abs(a) for a in transformed] == pytest.approx([1 / math.sqrt(8)] * 8)
+
+
+def test_the_live_demo_has_a_recorded_run_for_every_experiment():
+    import json
+    from conftest import API_DIR
+
+    recorded = json.loads((API_DIR.parent / "frontend" / "public" / "demo-results.json").read_text(encoding="utf-8"))
+    assert sorted(recorded) == sorted(e["slug"] for e in EXPERIMENTS)
+    assert all(run["error"] is None and run["result"] is not None for run in recorded.values())

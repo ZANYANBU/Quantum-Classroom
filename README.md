@@ -7,6 +7,8 @@
 
 **A side project: a browser lab that runs real Qiskit circuits**
 
+**[Try the live demo](https://zanyanbu.github.io/Quantum-Classroom/)** — all 12 experiments in the browser. The demo has no backend, so *Run* replays a result recorded from a real run; clone the repo to execute your own code.
+
 > An interactive full-stack educational platform for learning quantum computing through hands-on experiments using Qiskit.
 
 <p align="center"><img src="docs/screenshots/exp9-grover.png" alt="Grover's Algorithm in the lab: theory, sliders, the Qiskit editor and validated results" width="900"></p>
@@ -325,6 +327,7 @@ Quantum-Classroom/
 │   ├── main.py                   # Main API with /execute endpoint
 │   ├── requirements.txt          # Python dependencies (Qiskit, FastAPI)
 │   ├── requirements-dev.txt      # Test dependencies (pytest, httpx)
+│   ├── record_demo_results.py    # Records a real run of each experiment for the live demo
 │   └── tests/                    # API tests, and all 12 experiments run end to end
 │
 ├── frontend/                     # Next.js Frontend

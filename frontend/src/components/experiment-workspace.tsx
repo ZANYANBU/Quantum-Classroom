@@ -10,6 +10,21 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./ui/
 import { CodeEditor } from "./code-editor";
 import { ResultPanel, type ExecutionResult } from "./result-panel";
 
+// The live demo on GitHub Pages has no backend. There, Run replays a result
+// recorded from a real run (api/record_demo_results.py).
+const DEMO = process.env.NEXT_PUBLIC_DEMO === "1";
+const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || "";
+
+let recordedRuns: Promise<Record<string, ExecutionResult>> | null = null;
+
+function loadRecordedRuns() {
+  recordedRuns ??= fetch(`${BASE_PATH}/demo-results.json`).then((res) => {
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    return res.json();
+  });
+  return recordedRuns;
+}
+
 async function runRemote(code: string): Promise<ExecutionResult> {
   const endpoint = process.env.NEXT_PUBLIC_API_BASE || "http://localhost:8000";
   const res = await fetch(`${endpoint}/execute`, {
@@ -57,6 +72,23 @@ export function ExperimentWorkspace({ experiment }: { experiment: Experiment }) 
   const handleRun = async () => {
     setIsRunning(true);
     try {
+      if (DEMO) {
+        const untouched =
+          code === experiment.code &&
+          (experiment.parameters ?? []).every((p) => parameters[p.name] === p.default);
+        if (!untouched) {
+          setOutput({
+            stdout: "",
+            result: null,
+            error:
+              "This live demo replays a recorded run of the original code. To run edited code or other slider values, start the backend on your own machine (see the README).",
+          });
+          return;
+        }
+        const recorded = (await loadRecordedRuns())[experiment.slug];
+        setOutput(recorded ?? { stdout: "", result: null, error: "No recorded run for this experiment." });
+        return;
+      }
       const codeToRun = experiment.parameters?.length ? getCodeWithParameters() : code;
       const result = await runRemote(codeToRun);
       setOutput(result);
@@ -162,7 +194,9 @@ export function ExperimentWorkspace({ experiment }: { experiment: Experiment }) 
             <CodeEditor value={code} onChange={(v) => setCode(experiment.slug, v)} />
             <div className="flex items-center justify-between">
               <p className="text-xs text-slate-400">
-                Editing updates are kept locally per experiment using Zustand state.
+                {DEMO
+                  ? "Live demo: Run replays a recorded result. Clone the repo to run your own code."
+                  : "Editing updates are kept locally per experiment using Zustand state."}
               </p>
               <Button onClick={handleRun} disabled={isRunning} className="shadow-[0_10px_35px_rgba(6,182,212,0.35)]">
                 {isRunning ? <Rocket className="h-4 w-4 animate-spin" /> : <Play className="h-4 w-4" />}

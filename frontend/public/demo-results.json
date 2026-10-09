@@ -1,0 +1,472 @@
+{
+ "exp-1": {
+  "stdout": "Counts: {'0': 505, '1': 519}\n",
+  "result": {
+   "0": 505,
+   "1": 519
+  },
+  "error": null
+ },
+ "exp-2": {
+  "stdout": "Single Qubit Gates Demonstration:\nX|0> = [0.+0.j 1.+0.j]\nH|0> = [0.707+0.j 0.707+0.j]\nZ(H|0>) = [ 0.707+0.j -0.707+0.j]\nS(H|0>) = [0.707+0.j    0.   +0.707j]\nT(H|0>) = [0.707+0.j  0.5  +0.5j]\n",
+  "result": {
+   "X_gate": [
+    {
+     "real": 0.0,
+     "imag": 0.0
+    },
+    {
+     "real": 1.0,
+     "imag": 0.0
+    }
+   ],
+   "H_gate": [
+    {
+     "real": 0.7071067811865475,
+     "imag": 0.0
+    },
+    {
+     "real": 0.7071067811865475,
+     "imag": 0.0
+    }
+   ],
+   "Z_gate": [
+    {
+     "real": 0.7071067811865475,
+     "imag": 0.0
+    },
+    {
+     "real": -0.7071067811865475,
+     "imag": 0.0
+    }
+   ],
+   "S_gate": [
+    {
+     "real": 0.7071067811865475,
+     "imag": 0.0
+    },
+    {
+     "real": 0.0,
+     "imag": 0.7071067811865475
+    }
+   ],
+   "T_gate": [
+    {
+     "real": 0.7071067811865475,
+     "imag": 0.0
+    },
+    {
+     "real": 0.4999999999999999,
+     "imag": 0.4999999999999999
+    }
+   ]
+  },
+  "error": null
+ },
+ "exp-3": {
+  "stdout": "Multi-Qubit Gates:\nBell State |\u03a6+> = [0.70710678+0.j 0.        +0.j 0.        +0.j 0.70710678+0.j]\nSWAP |10> -> |01>: [0.+0.j 0.+0.j 1.+0.j 0.+0.j]\nToffoli counts: {'111 000': 1024}\n",
+  "result": {
+   "CNOT_Bell_State": [
+    {
+     "real": 0.7071067811865475,
+     "imag": 0.0
+    },
+    {
+     "real": 0.0,
+     "imag": 0.0
+    },
+    {
+     "real": 0.0,
+     "imag": 0.0
+    },
+    {
+     "real": 0.7071067811865475,
+     "imag": 0.0
+    }
+   ],
+   "SWAP_result": [
+    {
+     "real": 0.0,
+     "imag": 0.0
+    },
+    {
+     "real": 0.0,
+     "imag": 0.0
+    },
+    {
+     "real": 1.0,
+     "imag": 0.0
+    },
+    {
+     "real": 0.0,
+     "imag": 0.0
+    }
+   ],
+   "Toffoli_measurement": {
+    "111 000": 1024
+   }
+  },
+  "error": null
+ },
+ "exp-4": {
+  "stdout": "Initial state: control|+>, target|->\nAfter C-Z gate with target in |-> state\nMeasurement in X-basis shows phase kickback: {'00': 501, '11': 523}\nControl qubit acquired a phase, flipping |+> to |->\n",
+  "result": {
+   "initial_statevector": [
+    {
+     "real": 0.4999999999999999,
+     "imag": 0.0
+    },
+    {
+     "real": 0.4999999999999999,
+     "imag": 0.0
+    },
+    {
+     "real": -0.4999999999999999,
+     "imag": 0.0
+    },
+    {
+     "real": -0.4999999999999999,
+     "imag": 0.0
+    }
+   ],
+   "after_kickback": [
+    {
+     "real": 0.4999999999999999,
+     "imag": 0.0
+    },
+    {
+     "real": 0.4999999999999999,
+     "imag": 0.0
+    },
+    {
+     "real": -0.4999999999999999,
+     "imag": 0.0
+    },
+    {
+     "real": 0.4999999999999999,
+     "imag": 0.0
+    }
+   ],
+   "x_basis_measurement": {
+    "00": 501,
+    "11": 523
+   },
+   "explanation": "Phase kicked back to control: |+> -> |->"
+  },
+  "error": null
+ },
+ "exp-5": {
+  "stdout": "Circuit Identity Verification:\nH-Z-H = X: \u2713 VERIFIED\nH-X-H = Z: \u2713 VERIFIED\nS\u00b7S = Z: \u2713 VERIFIED\nT^4 = Z: \u2713 VERIFIED\nX\u00b7X = I: \u2713 VERIFIED\n",
+  "result": {
+   "H-Z-H = X": true,
+   "H-X-H = Z": true,
+   "S\u00b7S = Z": true,
+   "T^4 = Z": true,
+   "X\u00b7X = I": true
+  },
+  "error": null
+ },
+ "exp-6": {
+  "stdout": "Quantum Half Adder Results:\n----------------------------------------\n0+0 = 00 \u2713\n0+1 = 01 \u2713\n1+0 = 01 \u2713\n1+1 = 10 \u2713\n",
+  "result": {
+   "0+0": {
+    "input": [
+     0,
+     0
+    ],
+    "sum": 0,
+    "carry": 0,
+    "expected": [
+     0,
+     0
+    ],
+    "correct": true
+   },
+   "0+1": {
+    "input": [
+     0,
+     1
+    ],
+    "sum": 1,
+    "carry": 0,
+    "expected": [
+     1,
+     0
+    ],
+    "correct": true
+   },
+   "1+0": {
+    "input": [
+     1,
+     0
+    ],
+    "sum": 1,
+    "carry": 0,
+    "expected": [
+     1,
+     0
+    ],
+    "correct": true
+   },
+   "1+1": {
+    "input": [
+     1,
+     1
+    ],
+    "sum": 0,
+    "carry": 1,
+    "expected": [
+     0,
+     1
+    ],
+    "correct": true
+   }
+  },
+  "error": null
+ },
+ "exp-7": {
+  "stdout": "Circuit Analysis Results:\n==================================================\n\nBell_State:\n  Qubits: 2\n  Original - Depth: 2, Size: 2\n  Transpiled - Depth: 4, Size: 4\n  Optimization: 2.0x\n\nGHZ_State:\n  Qubits: 3\n  Original - Depth: 3, Size: 3\n  Transpiled - Depth: 5, Size: 5\n  Optimization: 1.67x\n\nQFT_3qubit:\n  Qubits: 3\n  Original - Depth: 5, Size: 6\n  Transpiled - Depth: 15, Size: 21\n  Optimization: 3.5x\n\nComplex_Entanglement:\n  Qubits: 4\n  Original - Depth: 5, Size: 11\n  Transpiled - Depth: 7, Size: 19\n  Optimization: 1.73x\n",
+  "result": {
+   "Bell_State": {
+    "qubits": 2,
+    "original_depth": 2,
+    "original_size": 2,
+    "original_gates": {
+     "h": 1,
+     "cx": 1
+    },
+    "transpiled_depth": 4,
+    "transpiled_size": 4,
+    "optimization_ratio": 2.0
+   },
+   "GHZ_State": {
+    "qubits": 3,
+    "original_depth": 3,
+    "original_size": 3,
+    "original_gates": {
+     "cx": 2,
+     "h": 1
+    },
+    "transpiled_depth": 5,
+    "transpiled_size": 5,
+    "optimization_ratio": 1.67
+   },
+   "QFT_3qubit": {
+    "qubits": 3,
+    "original_depth": 5,
+    "original_size": 6,
+    "original_gates": {
+     "h": 3,
+     "cp": 3
+    },
+    "transpiled_depth": 15,
+    "transpiled_size": 21,
+    "optimization_ratio": 3.5
+   },
+   "Complex_Entanglement": {
+    "qubits": 4,
+    "original_depth": 5,
+    "original_size": 11,
+    "original_gates": {
+     "h": 4,
+     "rz": 4,
+     "cx": 3,
+     "barrier": 1
+    },
+    "transpiled_depth": 7,
+    "transpiled_size": 19,
+    "optimization_ratio": 1.73
+   }
+  },
+  "error": null
+ },
+ "exp-8": {
+  "stdout": "Deutsch Algorithm Results:\n==================================================\nconstant_0           -> CONSTANT   \u2713\n  Expected: CONSTANT, Counts: {'0': 1024}\nconstant_1           -> CONSTANT   \u2713\n  Expected: CONSTANT, Counts: {'0': 1024}\nbalanced_identity    -> BALANCED   \u2713\n  Expected: BALANCED, Counts: {'1': 1024}\nbalanced_negation    -> BALANCED   \u2713\n  Expected: BALANCED, Counts: {'1': 1024}\n",
+  "result": {
+   "constant_0": {
+    "measurement": {
+     "0": 1024
+    },
+    "classification": "CONSTANT",
+    "expected": "CONSTANT",
+    "correct": true
+   },
+   "constant_1": {
+    "measurement": {
+     "0": 1024
+    },
+    "classification": "CONSTANT",
+    "expected": "CONSTANT",
+    "correct": true
+   },
+   "balanced_identity": {
+    "measurement": {
+     "1": 1024
+    },
+    "classification": "BALANCED",
+    "expected": "BALANCED",
+    "correct": true
+   },
+   "balanced_negation": {
+    "measurement": {
+     "1": 1024
+    },
+    "classification": "BALANCED",
+    "expected": "BALANCED",
+    "correct": true
+   }
+  },
+  "error": null
+ },
+ "exp-9": {
+  "stdout": "Grover's Algorithm: Searching for |5> = |101>\nIterations: 2\nFound: |101> with probability 0.936\nSuccess: \u2713\n",
+  "result": {
+   "marked_state": 5,
+   "marked_binary": "101",
+   "iterations": 2,
+   "measurement_counts": {
+    "111": 6,
+    "011": 10,
+    "100": 14,
+    "110": 12,
+    "001": 8,
+    "000": 6,
+    "010": 10,
+    "101": 958
+   },
+   "found_state": "101",
+   "found_state_int": 5,
+   "success": true,
+   "success_probability": 0.936
+  },
+  "error": null
+ },
+ "exp-10": {
+  "stdout": "Quantum Teleportation:\nOriginal state: |+> = (|0> + |1>)/\u221a2\nBob's measurements: P(0)=0.499, P(1)=0.501\nFidelity: 0.998\nSuccess: \u2713\n",
+  "result": {
+   "original_state": "|+> = (|0> + |1>)/\u221a2",
+   "all_measurements": {
+    "101": 134,
+    "011": 138,
+    "111": 130,
+    "100": 126,
+    "110": 123,
+    "001": 126,
+    "010": 125,
+    "000": 122
+   },
+   "bob_outcomes": {
+    "1": 513,
+    "0": 511
+   },
+   "bob_prob_0": 0.499,
+   "bob_prob_1": 0.501,
+   "expected_distribution": "50-50",
+   "teleportation_success": true,
+   "fidelity": 0.998
+  },
+  "error": null
+ },
+ "exp-11": {
+  "stdout": "BB84 Quantum Key Distribution:\nTransmitted: 16 qubits\nMatching bases: 6 (37.5%)\nSifted key length: 6\nError rate (QBER): 0.00%\nSecurity: \u2713 SECURE\nFinal shared key length: 3 bits\n",
+  "result": {
+   "protocol": "BB84",
+   "transmitted_qubits": 16,
+   "matching_bases": 6,
+   "sifted_key_length": 6,
+   "alice_key": "100011",
+   "bob_key": "100011",
+   "errors": 0,
+   "error_rate": 0.0,
+   "secure": true,
+   "final_key_length": 3,
+   "final_key": "100",
+   "security_threshold": "< 11% QBER"
+  },
+  "error": null
+ },
+ "exp-12": {
+  "stdout": "Quantum Fourier Transform (QFT):\nInitial state: |011> = |3>\nAfter QFT \u2192 iQFT: |011>\nReconstruction: \u2713\nProbability: 1.0\nCircuit depth: 14, Gates: 19\n\nQFT transforms computational basis to Fourier basis,\nenabling phase estimation and period finding algorithms.\n",
+  "result": {
+   "n_qubits": 3,
+   "initial_state": "011",
+   "initial_statevector": [
+    {
+     "real": 0.0,
+     "imag": 0.0
+    },
+    {
+     "real": 0.0,
+     "imag": 0.0
+    },
+    {
+     "real": 0.0,
+     "imag": 0.0
+    },
+    {
+     "real": 1.0,
+     "imag": 0.0
+    },
+    {
+     "real": 0.0,
+     "imag": 0.0
+    },
+    {
+     "real": 0.0,
+     "imag": 0.0
+    },
+    {
+     "real": 0.0,
+     "imag": 0.0
+    },
+    {
+     "real": 0.0,
+     "imag": 0.0
+    }
+   ],
+   "qft_statevector": [
+    {
+     "real": 0.3535533905932737,
+     "imag": 0.0
+    },
+    {
+     "real": 0.3535533905932737,
+     "imag": 0.0
+    },
+    {
+     "real": -0.3535533905932737,
+     "imag": 0.0
+    },
+    {
+     "real": -0.3535533905932737,
+     "imag": 0.0
+    },
+    {
+     "real": -2.1648901405887326e-17,
+     "imag": -0.3535533905932737
+    },
+    {
+     "real": -2.1648901405887326e-17,
+     "imag": -0.3535533905932737
+    },
+    {
+     "real": 2.1648901405887326e-17,
+     "imag": 0.3535533905932737
+    },
+    {
+     "real": 2.1648901405887326e-17,
+     "imag": 0.3535533905932737
+    }
+   ],
+   "inverse_qft_measurement": {
+    "011": 1024
+   },
+   "most_probable_state": "011",
+   "reconstruction_success": true,
+   "probability": 1.0,
+   "circuit_depth": 14,
+   "gate_count": 19
+  },
+  "error": null
+ }
+}
